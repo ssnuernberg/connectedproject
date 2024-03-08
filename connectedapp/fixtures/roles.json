@@ -1,0 +1,16 @@
+[
+  {
+    "model": "connectedapp.role",
+    "pk": 1,
+    "fields": {
+      "name": "Student"
+    }
+  },
+  {
+    "model": "connectedapp.role",
+    "pk": 2,
+    "fields": {
+      "name": "Teacher"
+    }
+  }
+]
