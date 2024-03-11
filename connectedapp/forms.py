@@ -44,6 +44,11 @@ class CourseForm(forms.ModelForm):
             'students': forms.SelectMultiple(),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(CourseForm, self).__init__(*args, **kwargs)
+        self.fields['teacher'].queryset = CustomUser.objects.filter(roles__name='Teacher')
+        self.fields['students'].queryset = CustomUser.objects.filter(roles__name='Student')
+
 
 class FeedbackForm(forms.ModelForm):
     class Meta:

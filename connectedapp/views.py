@@ -114,19 +114,27 @@ class UserCreateView(LoginRequiredMixin, TeacherRequiredMixin, CreateView):
     success_url = reverse_lazy('connectedapp:user_list')
 
 
-class UserUpdateView(LoginRequiredMixin, TeacherRequiredMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CustomUser
     form_class = CustomUserChangeForm
     template_name = 'user_form.html'
+
+    def test_func(self):
+        user = self.get_object()
+        return self.request.user == user
 
     def get_success_url(self):
         return reverse_lazy('connectedapp:user_detail', kwargs={'pk': self.object.pk})
 
 
-class UserDeleteView(LoginRequiredMixin, TeacherRequiredMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = CustomUser
     template_name = 'user_confirm_delete.html'
     success_url = reverse_lazy('connectedapp:user_list')
+
+    def test_func(self):
+        user = self.get_object()
+        return self.request.user == user
 
 
 class StatusListView(LoginRequiredMixin, ListView):
@@ -170,6 +178,9 @@ class StatusDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         status = self.get_object()
         return self.request.user == status.user  # Only allow the user who created the status to delete it
+
+    def get_success_url(self):
+        return reverse_lazy('connectedapp:user_detail', kwargs={'pk': self.object.user.pk})
 
 
 class CourseListView(ListView):

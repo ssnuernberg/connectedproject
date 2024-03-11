@@ -30,7 +30,7 @@
       {% endfor %}
       </div>
   </div>
-  {% if user.is_authenticated and user.is_teacher %}
+  {% if user.is_authenticated and user_detail == request.user %}
     <a href="{% url 'connectedapp:user_update' user_detail.pk %}" class="btn btn-primary mt-3">Edit</a>
     <a href="{% url 'connectedapp:user_delete' user_detail.pk %}" class="btn btn-danger mt-3">Delete</a>
   {% endif %}

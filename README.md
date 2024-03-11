@@ -13,19 +13,19 @@ Installation
 
 To install ConnectEd:
 
-1. Install [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
+1. Install [pyenv](https://github.com/pyenv/pyenv-installer).
 
 2. On a command prompt or terminal with your ConnectEd projects's directory as
    the current working directory, run the following commands:
 
-   a. Create and activate an environment:
+   a. Install Python 3.12.2:
 
-       conda create --name ConnectEd
-       conda activate ConnectEd
+       pyenv install 3.12.2
 
-   b. Install pip:
-
-       pip install pip
+   b. Create and activate a virtual environment:
+   
+       pyenv virtualenv 3.12.2 connected
+       pyenv activate connected
 
    c. Install Django:
 
